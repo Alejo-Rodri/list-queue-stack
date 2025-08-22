@@ -11,5 +11,5 @@ public interface ISinglyLinkedList<T> {
         Removes and returns the first element of the list.
      */
     T removeFirst();
-    T removeLast();
+    boolean contains(T element);
 }

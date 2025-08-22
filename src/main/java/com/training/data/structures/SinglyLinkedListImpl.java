@@ -14,6 +14,12 @@ public class SinglyLinkedListImpl<T> implements ISinglyLinkedList<T> {
         size = 1;
     }
 
+    public SinglyLinkedListImpl() {
+        head = null;
+        tail = null;
+        size = 0;
+    }
+
     @Override
     public int size() {
         return size;
@@ -21,16 +27,18 @@ public class SinglyLinkedListImpl<T> implements ISinglyLinkedList<T> {
 
     @Override
     public boolean isEmpty() {
-        return size <= 0;
+        return head == null;
     }
 
     @Override
     public T first() {
+        if (isEmpty()) return null;
         return head.getValue();
     }
 
     @Override
     public T last() {
+        if (isEmpty()) return null;
         return tail.getValue();
     }
 
@@ -45,18 +53,28 @@ public class SinglyLinkedListImpl<T> implements ISinglyLinkedList<T> {
     @Override
     public void addLast(T element) {
         var newest = new NodeImpl<>(element);
-        tail.setNext(newest);
+        if (isEmpty()) head = newest;
+        else tail.setNext(newest);
         tail = newest;
         size++;
     }
 
     @Override
     public T removeFirst() {
-        return null;
+        if (isEmpty()) return null;
+        var first = head.getValue();
+        head = head.getNext();
+        size--;
+        return first;
     }
 
     @Override
-    public T removeLast() {
-        return null;
+    public boolean contains(T value) {
+        INode<T> current = head;
+        while (current != null) {
+            if (current.getValue().equals(value)) return true;
+            current = current.getNext();
+        }
+        return false;
     }
 }
