@@ -33,7 +33,7 @@ public class PriorityQueueImpl<T> implements IPriorityQueue<T> {
         }
 
         PriorityNode<T> current = head;
-        while (!Objects.isNull(current.getNext()) && newNode.getKey() >= current.getNext().getKey())
+        while (current.getNext() != null && newNode.getKey() >= current.getNext().getKey())
             current = current.getNext();
 
         newNode.setNext(current.getNext());
