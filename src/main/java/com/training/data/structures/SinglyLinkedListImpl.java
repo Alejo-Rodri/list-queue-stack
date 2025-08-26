@@ -64,6 +64,9 @@ public class SinglyLinkedListImpl<T> implements ISinglyLinkedList<T> {
         if (isEmpty()) return null;
         var first = head.getValue();
         head = head.getNext();
+
+        if (head == null) tail = null;
+
         size--;
         return first;
     }
